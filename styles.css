@@ -1,0 +1,177 @@
+body {
+    font-family: "PT Sans", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    display: flex;
+    flex-flow: column;
+    max-width: 960px;
+    margin: 20px auto;
+}
+
+
+.wrapper > * {
+    margin-bottom: 40px;
+}
+
+.battle-filed {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+}
+
+.player-one,
+.player-two {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    flex-basis: 100%;
+}
+
+.player-one__name,
+.player-two__name {
+    font-size: 40px;
+    text-transform: uppercase;
+}
+
+.player-one__health-container,
+.player-two__health-container {
+    position: relative;
+    margin: 0 auto;
+    width: 80%;
+    height: 50px;
+    background-color: #e5e5e5;
+}
+
+.player-one__health-number,
+.player-two__health-number {
+    position: absolute;
+    top: 35%;
+    left: 47%;
+    color: white;
+}
+
+.player-one__health-bar,
+.player-two__health-bar {
+    background-color: green;
+    height: 100%;
+    width: 100%;
+    transition-duration: 0.3s;
+}
+
+.controls {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: stretch;
+    padding: 20px 40px;
+    border: 1px solid rgba(0,0,0, 0.3);
+    box-shadow: 1px 3px 5px rgba(0,0,0, 0.2);
+}
+
+.btn {
+    font-size: 20px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px rgba(0,0,0, 0.4);
+    padding: 10px 15px;
+    outline: none;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn:active {
+    color: grey;
+}
+
+.new-game-btn {
+    background-color: rgba(135, 255, 0, 0.33);
+}
+
+.attack-btn {
+    margin-bottom: 20px;
+    background-color: rgba(255, 0, 0, 0.62);
+}
+
+.special-attack-btn {
+    margin-bottom: 20px;
+    background-color: rgba(255, 165, 0, 0.69);
+}
+
+.heal-btn {
+    margin-bottom: 20px;
+    background-color: rgba(92, 255, 136, 0.51);
+}
+
+.give-up-btn {
+    background-color: white;
+}
+
+.log {
+    display: flex;
+    flex-flow: column-reverse;
+    justify-content: flex-end;
+    min-height: 150px;
+    max-height: 380px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0, 0.3);
+    box-shadow: 1px 3px 5px rgba(0,0,0, 0.2);
+    list-style: none;
+    padding: 10px 20px;
+}
+
+.log__item {
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.monsterHit {
+    background-color: rgba(255, 0, 0, 0.65);
+}
+
+.playerHit {
+    background-color: rgba(72, 128, 255, 0.68);
+}
+
+.playerHeals {
+    background-color: rgba(0, 200, 0, 0.59);
+}
+
+@media screen and (min-width: 768px) {
+    .battle-filed {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        min-height: 170px;
+    }
+
+    .player-one,
+    .player-two {
+        flex-basis: 50%;
+    }
+
+    .controls {
+        flex-flow: row nowrap;
+        min-height: 100px;
+        padding: 0;
+        align-items: center;
+    }
+
+    .attack-btn,
+    .special-attack-btn,
+    .heal-btn {
+        margin-bottom: 0;
+        margin-right: 20px;
+    }
+
+}
