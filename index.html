@@ -28,15 +28,15 @@
         <button class="new-game-btn btn" @click="startNewGame()" v-if="!isGameStarted">Start new game</button>
         <template v-if="isGameStarted">
             <button class="attack-btn btn" @click="attack()">Attack</button>
-            <button class="special-attack-btn btn" @click="specialAttack()">Special attack</button>
+            <button class="special-attack-btn btn" :disabled="specialEnabled" @click="specialAttack()">Special attack</button>
             <button class="heal-btn btn" @click="heal()">Heal</button>
             <button class="give-up-btn btn" @click="gameLost()">Give up</button>
         </template>
     </div>
-    <div class="log">
+    <div class="log" v-if="logs.length > 0">
         <template v-for="log in logs">
             <div class="log__item" :class="whichClass(log)">
-                {{log.who}} {{log.action}} for {{log.value}} points
+                {{log.who}} {{log.action}} for {{log.value}}
             </div>
         </template>
     </div>

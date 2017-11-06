@@ -3,12 +3,13 @@ new Vue({
     data: {
         playerHealth: 100,
         monsterHealth: 100,
-        monsterMaxHit: 10,
+        monsterMaxAttack: 13,
         playerMaxAttack: 10,
-        playerMaxSpecial: 20,
+        playerMaxSpecial: 30,
         playerMaxHeal: 15,
         logs: [],
-        isGameStarted: false
+        isGameStarted: false,
+        gainedPower: 0
     },
     computed: {
         playerHealthBar() {
@@ -16,6 +17,9 @@ new Vue({
         },
         monsterHealthBar() {
             return this.monsterHealth > 0 ? this.monsterHealth : 0;
+        },
+        specialEnabled() {
+            return this.gainedPower < 5;
         }
     },
     watch: {
@@ -36,14 +40,19 @@ new Vue({
             this.monsterHealth = 100;
             this.isGameStarted = true;
             this.logs = [];
+            this.gainedPower = 0;
         },
         gameLost() {
-            this.isGameStarted = false;
-            alert('You lost the game!');
+            if (this.isGameStarted) {
+                this.isGameStarted = false;
+                alert('You lost the game!');
+            }
         },
         gameWon() {
-            this.isGameStarted = false;
-            alert('You won the game!');
+            if (this.isGameStarted) {
+                this.isGameStarted = false;
+                alert('You won the game!');
+            }
         },
         addLog(obj) {
             this.logs.push(obj);
@@ -52,7 +61,7 @@ new Vue({
           return Math.floor(Math.random() * (max + 1));
         },
         monsterAttack() {
-            const value = this.generateRandomNumber(this.monsterMaxHit);
+            const value = this.generateRandomNumber(this.monsterMaxAttack);
             this.playerHealth -= value;
             this.addLog({value, who: 'monster', action: 'hits'});
         },
@@ -60,18 +69,20 @@ new Vue({
             this.monsterAttack();
             const value = this.generateRandomNumber(this.playerMaxAttack);
             this.monsterHealth -= value;
+            this.gainedPower += 1;
             this.addLog({value, who: 'player', action: 'hits'});
         },
         specialAttack() {
             this.monsterAttack();
             const value = this.generateRandomNumber(this.playerMaxSpecial);
             this.monsterHealth -= value;
+            this.gainedPower = 0;
             this.addLog({value, who: 'player', action: 'hits'});
         },
         heal() {
             this.monsterAttack();
             const value = this.generateRandomNumber(this.playerMaxHeal);
-            this.playerHealth += value;
+            this.playerHealth = (this.playerHealth + value) > 100 ? 100 : (this.playerHealth + value);
             this.addLog({value, who: 'player', action: 'heals'});
         },
         whichClass(log) {

@@ -1,3 +1,13 @@
+@keyframes specialAttackAnimation {
+    from {
+        background-color: #ff0008;
+    }
+
+    to {
+        background-color: #ffa302;
+    }
+}
+
 body {
     font-family: "PT Sans", sans-serif;
 }
@@ -51,7 +61,9 @@ body {
 .player-two__health-number {
     position: absolute;
     top: 35%;
-    left: 47%;
+    right: 0;
+    left: 0;
+    text-align: center;
     color: white;
 }
 
@@ -102,7 +114,17 @@ body {
 
 .special-attack-btn {
     margin-bottom: 20px;
-    background-color: rgba(255, 165, 0, 0.69);
+    animation-name: specialAttackAnimation;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+.special-attack-btn:disabled {
+    animation: none;
+    box-shadow: none;
+    color: #aaaaaa;
+    background-color: rgba(255, 165, 0, 0.33);
 }
 
 .heal-btn {
@@ -118,8 +140,7 @@ body {
     display: flex;
     flex-flow: column-reverse;
     justify-content: flex-end;
-    min-height: 150px;
-    max-height: 380px;
+    max-height: 425px;
     overflow: hidden;
     border: 1px solid rgba(0,0,0, 0.3);
     box-shadow: 1px 3px 5px rgba(0,0,0, 0.2);
@@ -131,7 +152,7 @@ body {
     text-align: center;
     font-size: 18px;
     text-transform: uppercase;
-    padding: 5px;
+    padding: 10px 0;
     margin: 5px 0;
 }
 
